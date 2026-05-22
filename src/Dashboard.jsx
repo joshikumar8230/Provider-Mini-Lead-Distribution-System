@@ -15,7 +15,7 @@ import {
   Divider,
 } from "@mui/material"
 
-const socket = io("http://localhost:5000")
+const socket = io("https://provider-mini-lead-distribution-system.onrender.com")
 
 function Dashboard() {
 
@@ -23,13 +23,10 @@ function Dashboard() {
   const [selected, setSelected] = useState(null)
   const [details, setDetails] = useState(null)
 
-  // =========================
-  // LOAD PROVIDERS
-  // =========================
   const loadProviders = async () => {
 
     const res = await axios.get(
-      "http://localhost:5000/api/providers"
+      "https://provider-mini-lead-distribution-system.onrender.com/api/providers"
     )
 
     setProviders(res.data)
@@ -39,23 +36,17 @@ function Dashboard() {
     loadProviders()
   }, [])
 
-  // =========================
-  // CLICK PROVIDER
-  // =========================
   const handleClick = async (id) => {
 
     setSelected(id)
 
     const res = await axios.get(
-      `http://localhost:5000/api/providers/${id}`
+      `https://provider-mini-lead-distribution-system.onrender.com/api/providers/${id}`
     )
 
     setDetails(res.data)
   }
 
-  // =========================
-  // SOCKET EVENTS
-  // =========================
   useEffect(() => {
 
     socket.on("new-lead", () => {
@@ -103,10 +94,6 @@ return (
       >
         Provider Dashboard
       </Typography>
-
-      {/* =========================
-          PROVIDERS SECTION
-      ========================= */}
 
       <Paper
         elevation={4}
@@ -188,10 +175,6 @@ return (
 
       </Paper>
 
-      {/* =========================
-          PROVIDER DETAILS SECTION
-      ========================= */}
-
       <Paper
         elevation={4}
         sx={{
@@ -220,7 +203,6 @@ return (
 
         {details && (
           <>
-            {/* PROVIDER INFO */}
 
             <Box mb={4}>
 
@@ -248,8 +230,6 @@ return (
             </Box>
 
             <Divider sx={{ mb: 3 }} />
-
-            {/* LEADS */}
 
             <Typography
               variant="h5"

@@ -30,9 +30,6 @@ function App() {
 
   const [error, setError] = useState("")
 
-  // =========================
-  // HANDLE INPUT
-  // =========================
   function handleChange(e) {
 
     setFormData({
@@ -41,26 +38,21 @@ function App() {
     })
   }
 
-  // =========================
-  // VALIDATION
-  // =========================
   const validateForm = () => {
 
-    // NAME VALIDATION
+   
     const nameRegex = /^[A-Za-z ]+$/
 
     if (!nameRegex.test(formData.customerName.trim())) {
       return "Name should contain only letters"
     }
 
-    // CITY VALIDATION
     const cityRegex = /^[A-Za-z ]+$/
 
     if (!cityRegex.test(formData.city.trim())) {
       return "City should contain only letters"
     }
 
-    // PHONE VALIDATION
     const phoneRegex = /^[0-9]{10}$/
 
     if (!phoneRegex.test(formData.phone)) {
@@ -70,9 +62,6 @@ function App() {
     return null
   }
 
-  // =========================
-  // SUBMIT FORM
-  // =========================
   async function handleSubmit(e) {
 
     e.preventDefault()
@@ -83,7 +72,7 @@ function App() {
 
     setError("")
 
-    // VALIDATE FIRST
+
     const validationError = validateForm()
 
     if (validationError) {
@@ -98,7 +87,7 @@ function App() {
     try {
 
       const response = await axios.post(
-        "http://localhost:5000/api/leads/create",
+        "https://provider-mini-lead-distribution-system.onrender.com/api/leads/create",
         formData
       )
 
@@ -155,8 +144,6 @@ function App() {
           }}
         >
 
-          {/* TITLE */}
-
           <Typography
             variant="h4"
             fontWeight="bold"
@@ -174,7 +161,6 @@ function App() {
             connected with providers instantly.
           </Typography>
 
-          {/* SUCCESS */}
 
           {message && (
             <Alert
@@ -185,7 +171,7 @@ function App() {
             </Alert>
           )}
 
-          {/* ERROR */}
+     
 
           {error && (
             <Alert
@@ -196,7 +182,7 @@ function App() {
             </Alert>
           )}
 
-          {/* FORM */}
+        
 
           <form onSubmit={handleSubmit}>
 
@@ -263,8 +249,6 @@ function App() {
               onChange={handleChange}
               margin="normal"
             />
-
-            {/* BUTTON */}
 
             <Button
               type="submit"

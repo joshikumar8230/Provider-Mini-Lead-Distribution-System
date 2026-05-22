@@ -25,9 +25,6 @@ function Testtools() {
 
   const [loading, setLoading] = useState(false)
 
-  // =========================
-  // RESET QUOTA
-  // =========================
   const resetQuota = async () => {
 
     try {
@@ -38,7 +35,7 @@ function Testtools() {
         "reset-" + Date.now()
 
       const res = await axios.post(
-        "http://localhost:5000/api/webhook/reset-quota",
+        "https://provider-mini-lead-distribution-system.onrender.com/api/webhook/reset-quota",
         {
           eventId,
         }
@@ -61,25 +58,21 @@ function Testtools() {
     }
   }
 
-  // =========================
-  // WEBHOOK IDEMPOTENCY TEST
-  // =========================
   const spamWebhook = async () => {
 
     try {
 
       setLoading(true)
 
-      // SAME EVENT ID
       const eventId =
-        "spam-reset-001"
+       "reset-" + Date.now()
 
       const results = []
 
       for (let i = 0; i < 5; i++) {
 
         const res = await axios.post(
-          "http://localhost:5000/api/webhook/reset-quota",
+          "https://provider-mini-lead-distribution-system.onrender.com/api/webhook/reset-quota",
           {
             eventId,
           }
@@ -117,7 +110,7 @@ function Testtools() {
       setLoading(true)
 
       const res = await axios.post(
-        "http://localhost:5000/api/test/generate-leads"
+        "https://provider-mini-lead-distribution-system.onrender.com/api/test/generate-leads"
       )
 
       setMessage(
@@ -229,7 +222,6 @@ Failed: ${res.data.failedCount}
 
           </Card>
 
-          {/* WEBHOOK SPAM */}
 
           <Card
             elevation={4}
